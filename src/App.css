@@ -1,0 +1,19 @@
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.text-input {
+    height: 2.5em;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.form-btn {
+    align-self: end;
+}
