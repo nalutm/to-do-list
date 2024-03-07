@@ -1,9 +1,23 @@
-import { MouseEvent, ChangeEvent, useState, useEffect, useRef } from "react";
+import { 
+  MouseEvent, 
+  ChangeEvent, 
+  useState, 
+  useEffect, 
+  // useRef 
+} from "react";
 import { FaRegTrashAlt, FaPencilAlt } from "react-icons/fa";
+import { ImCheckboxUnchecked, ImCheckboxChecked } from "react-icons/im";
 import {v4 as uuidv4} from 'uuid';        
 
 import "./App.css";
-import { ImCheckboxUnchecked, ImCheckboxChecked } from "react-icons/im";
+import "./components/InputText/InputText.css";
+import "./components/Button/Button.css"
+import "./components/Form/Form.css";
+
+import InputText from "./components/InputText/InputText";
+import Button from "./components/Button/Button";
+import Form from "./components/Form/Form";
+
 
 function App() {
   interface Task {
@@ -12,7 +26,7 @@ function App() {
     checked: boolean;
   }
 
-  const inputRef = useRef(null);
+  // const inputRef = useRef(null);
 
   const localTasksList = localStorage.getItem("tasks");
   const [task, setTask] = useState({
@@ -90,7 +104,6 @@ function App() {
 
     const taskTitle = tasksList.filter((task: Task) => {
       if (task.id.toString() === id) {
-        console.log(task.title)
         return task
       }
     })[0]["title"]
@@ -119,25 +132,43 @@ function App() {
 
     setTaskEdited('');
     setisTaskEdit(false);
-    if (inputRef.current) inputRef.current.focus();
+    // if (inputRef.current) inputRef.current.focus();
   }
-
+  
   const cancelEditTask = () => {
     setEditWarning(false);
     setisTaskEdit(false);
-    if (inputRef.current) inputRef.current.focus();
+    // if (inputRef.current) inputRef.current.focus();
   }
 
   return (
     <>
       <h1>To do List</h1> 
-      <form className="form">
-        <div className="input">
+      <Form 
+        className={warning ? "text-input text-input--invalid" : "text-input" } 
+        value={task.title}
+        onChange={handleChange}
+        onClick={createTask}
+      />
+      {/* <form className="form">
+        <div className="input-wrapper">
+          <InputText 
+            name="createTaks" 
+            autoFocus={true}
+            htmlFor="task" 
+            label="Tarefa"
+            type="text"
+            id="task"
+            value={task.title}
+            onChange={handleChange}
+            placeholder="Digite uma tarefa" 
+            className={warning ? "text-input text-input--invalid" : "text-input" }
+          />
           <label htmlFor="task">Tarefa</label>
-          <input autoFocus ref={inputRef} type="text" id="task" value={task.title} onChange={handleChange} placeholder="Tarefa" className={warning ? "text-input text-input--invalid" : "text-input" }/> 
+          <input autoFocus={true} ref={inputRef} type="text" id="task" value={task.title} onChange={handleChange} placeholder="Tarefa" className={warning ? "text-input text-input--invalid" : "text-input" }/> 
         </div>
-        <button onClick={createTask} className="form-btn">Criar tarefa</button> 
-      </form>
+        <Button onClick={createTask} className="form-btn">Criar tarefa</Button>
+      </form> */}
       {warning && !taskEdited && <span className="invalid-input">Digite sua tarefa</span>}
 
       <ul className="tasks-list">
@@ -158,13 +189,24 @@ function App() {
               </div>}
               {isTaskEdit && taskSelectedId === task.id.toString() && <div>
                 <div className="edit">
-                  <div className={"input-edit"}>
-                    <label htmlFor="edit-task">Editar tarefa</label>
-                    <input autoFocus type="text" id="edit-task" value={taskEdited} onChange={editTask} placeholder="Tarefa" className={editWarning ? "text-input text-input--invalid" : "text-input"}/> 
+                  <div className="input-edit">
+                  <InputText 
+                    name="editTask" 
+                    autoFocus={true}
+                    htmlFor="edit-task" 
+                    label="Editar tarefa"
+                    type="text"
+                    id="edit-task"
+                    value={taskEdited}
+                    onChange={editTask}
+                    className={editWarning ? "text-input text-input--invalid" : "text-input"}
+                  />
+                    {/* <label htmlFor="edit-task">Editar tarefa</label>
+                    <input autoFocus type="text" id="edit-task" value={taskEdited} onChange={editTask} className={editWarning ? "text-input text-input--invalid" : "text-input"}/>  */}
                   </div>
                   <div className="input-edit--actions">
-                    <button onClick={submitEditedTask} id={taskSelectedId}>Salvar</button> 
-                    <button className="button--cancel" onClick={cancelEditTask}>Cancelar</button>
+                    <Button onClick={submitEditedTask} id={taskSelectedId}>Salvar</Button>
+                    <Button onClick={cancelEditTask} className="button--cancel">Cancelar</Button>
                   </div>
                 </div>
                 {editWarning && <span className="invalid-input invalid-input--edit-task">Digite sua tarefa</span>}

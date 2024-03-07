@@ -1,8 +1,8 @@
-.input {
+/* .input {
     display: flex;
     flex-direction: column;
     gap: 0.5em;
-}
+} */
 
 .edit {
     align-items: center;
@@ -22,18 +22,6 @@
     gap: 0.5em;
 }
 
-.text-input {
-    border-radius: 8px;
-    border: 0.2em solid transparent;
-    height: 3em;
-    padding: 0.5em;
-    box-sizing: border-box;
-}
-
-.text-input--invalid {
-    border-color: #b42529;
-}
-
 .invalid-input--edit-task {
     margin-left: 1em;
 }
@@ -45,15 +33,11 @@
     margin-top: 0.3em;
 }
 
-.form {
+/* .form {
     display: flex;
     align-items: center;
     gap: 0.5em;
-}
-
-.form-btn {
-    align-self: end;
-}
+} */
 
 .tasks-list {
     margin: 1em 0;
@@ -102,12 +86,4 @@
 
 .checkbox {
     cursor: pointer;
-}
-
-.button--cancel {
-    background-color: #b42529;
-}
-
-.button--cancel:hover {
-    border-color: #fff; 
 }
