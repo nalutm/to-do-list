@@ -4,8 +4,45 @@
     gap: 0.5em;
 }
 
+.edit {
+    align-items: center;
+    display: flex;
+    gap: 0.5em;
+    margin-left: 1em;
+}
+
+.input-edit {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-edit--actions {
+    display: flex;
+    align-self: flex-end;
+    gap: 0.5em;
+}
+
 .text-input {
-    height: 2.5em;
+    border-radius: 8px;
+    border: 0.2em solid transparent;
+    height: 3em;
+    padding: 0.5em;
+    box-sizing: border-box;
+}
+
+.text-input--invalid {
+    border-color: #b42529;
+}
+
+.invalid-input--edit-task {
+    margin-left: 1em;
+}
+
+.invalid-input {
+    color: #b42529;
+    font-weight: bold;
+    display: block;
+    margin-top: 0.3em;
 }
 
 .form {
@@ -16,4 +53,61 @@
 
 .form-btn {
     align-self: end;
+}
+
+.tasks-list {
+    margin: 1em 0;
+    padding: 0;
+}
+
+.task {
+    align-items: center;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0.5em;
+}
+
+.task-title {
+    align-items: center;
+    display: flex;
+    gap: 0.5em;
+}
+
+.task-title--checked {
+    text-decoration: line-through;
+}
+
+.task-actions {
+    display: flex;
+}
+
+.task-icon {
+    cursor: pointer;
+    padding: .5em;
+    
+}
+
+.task-icon:hover {
+    background-color: #429867;
+}
+
+.task:has(.task-icon:hover) {
+    background-color: #1a1a1a;
+}
+
+.task-icon--delete:hover {
+   background-color: #b42529; 
+}
+
+.checkbox {
+    cursor: pointer;
+}
+
+.button--cancel {
+    background-color: #b42529;
+}
+
+.button--cancel:hover {
+    border-color: #fff; 
 }
