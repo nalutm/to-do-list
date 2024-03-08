@@ -1,5 +1,6 @@
 import Form from "./components/Form/Form";
 import TaskList from "./components/TaskList/TaskList";
+import "./index.css";
 
 function App() {
 
