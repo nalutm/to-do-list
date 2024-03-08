@@ -51,3 +51,10 @@
     display: block;
     margin-top: 0.3em;
 }
+
+@media only screen and (max-width: 600px) {
+    .edit {
+        flex-direction: column;
+        margin-left: 0;
+    }
+}

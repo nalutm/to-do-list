@@ -46,10 +46,11 @@ function Form({type, formClassName, htmlFor, label, formId}: FormProps) {
               />
               </div>
               {type === "create" && <Button type="submit" className="form-btn">Criar tarefa</Button>}
-              {type === "edit" && <div className="input-edit--actions">
+              {type === "edit" && 
+              <div className="input-edit--actions">
                 <Button type="submit" id={id}>Salvar</Button>
                 <Button onClick={cancelAction} className="button--cancel">Cancelar</Button>
-            </div>
+              </div>
             }
         </form>
     </>

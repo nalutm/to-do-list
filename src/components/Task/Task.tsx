@@ -24,30 +24,36 @@ function Task({
 
     return (
         <>
+          <div className="task-content">
             <div className={checkClassName} id={taskID}>
-                {!isChecked && <ImCheckboxUnchecked className="checkbox" onClick={check}/>}
-                {isChecked && <ImCheckboxChecked className="checkbox" onClick={check}/>}
+                {!isChecked && 
+                <ImCheckboxUnchecked className="checkbox" onClick={check}/>}
+                {isChecked && 
+                <ImCheckboxChecked className="checkbox" onClick={check}/>}
                 {title}
-              </div>
-                {!editAction && <div className="task-actions" id={taskID}>
-                  <FaRegTrashAlt onClick={deleteTask} className="task-icon task-icon--delete"/>
-                  <FaPencilAlt onClick={selectTask} className="task-icon"/>
-                </div>}
-                {editAction && id !== taskID && <div className="task-actions" id={taskID}>
-                  <FaRegTrashAlt onClick={deleteTask} className="task-icon task-icon--delete"/>
-                  <FaPencilAlt onClick={selectTask} className="task-icon"/>
-                </div>}
-                {editAction && id === taskID && 
-                  <div>
-                    <Form 
-                      type="edit" 
-                      formClassName="edit" 
-                      htmlFor="edit-task"
-                      label="Editar Tarefa"
-                      formId="edit-task"
-                    />
-                  </div>
-                }
+            </div>
+            {!editAction && 
+            <div className="task-actions" id={taskID}>
+              <FaRegTrashAlt onClick={deleteTask} className="task-icon task-icon--delete"/>
+              <FaPencilAlt onClick={selectTask} className="task-icon"/>
+            </div>}
+            {editAction && id !== taskID && 
+            <div className="task-actions" id={taskID}>
+              <FaRegTrashAlt onClick={deleteTask} className="task-icon task-icon--delete"/>
+              <FaPencilAlt onClick={selectTask} className="task-icon"/>
+            </div>}
+          </div>
+          {editAction && id === taskID && 
+          <div>
+            <Form 
+              type="edit" 
+              formClassName="edit" 
+              htmlFor="edit-task"
+              label="Editar Tarefa"
+              formId="edit-task"
+            />
+          </div>
+          }
         </>
     )
 }
