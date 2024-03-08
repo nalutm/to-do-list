@@ -9,3 +9,45 @@
     flex-direction: column;
     gap: 0.5em;
 }
+
+.text-input {
+    border-radius: 8px;
+    border: 0.2em solid transparent;
+    height: 3em;
+    padding: 0.5em;
+    box-sizing: border-box;
+}
+
+.text-input--invalid {
+    border-color: #b42529;
+}
+
+.edit {
+    align-items: center;
+    display: flex;
+    gap: 0.5em;
+    margin-left: 1em;
+}
+
+.input-edit {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.input-edit--actions {
+    display: flex;
+    align-self: flex-end;
+    gap: 0.5em;
+}
+
+.invalid-input--edit-task {
+    margin-left: 1em;
+}
+
+.invalid-input {
+    color: #b42529;
+    font-weight: bold;
+    display: block;
+    margin-top: 0.3em;
+}

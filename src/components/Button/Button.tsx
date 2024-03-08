@@ -1,8 +1,10 @@
 import { MouseEvent } from "react";
 
+import "./Button.css"
 
 interface ButtonProps {
-    onClick: (event: MouseEvent<HTMLButtonElement>) => void
+    onClick?: (event: MouseEvent<HTMLButtonElement>) => void
+    type?: "submit" | "reset" | "button" | undefined,
     className?: string,
     id?: string,
     children: string
@@ -10,12 +12,13 @@ interface ButtonProps {
 
 function Button({
     onClick,
+    type,
     className,
     id,
     children
 } : ButtonProps) {
     return (
-        <button onClick={onClick} className={className} id={id}>{children}</button> 
+        <button onClick={onClick} type={type} className={className} id={id}>{children}</button> 
     )
 }
 

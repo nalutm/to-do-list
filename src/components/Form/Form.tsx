@@ -1,44 +1,58 @@
-import { ChangeEvent, MouseEvent } from "react";
+import { useContext } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import {v4 as uuidv4} from 'uuid';        
 
-import "../Button/Button.css";
-import InputText from "../InputText/InputText";
+import "./Form.css";
+
 import Button from "../Button/Button";
+import { TaskContext } from "../../contexts/task";
 
-
-
-interface FormProps {
-    className: string,
-    value: string,
-    onChange: (event: ChangeEvent<HTMLInputElement>) => void, 
-    onClick: (event: MouseEvent<HTMLButtonElement>) => void
+interface Input {
+    title: string;
 }
 
-function Form({
-    className,
-    value,
-    onChange,
-    onClick
-}: FormProps) {
-    return (
-        <form className="form">
+interface FormProps {
+  type: "create" | "edit",
+  formClassName: string,
+  htmlFor: string,
+  label: string,
+  formId: string
+}
+
+function Form({type, formClassName, htmlFor, label, formId}: FormProps) {
+    const { register, handleSubmit, reset } = useForm<Input>();
+    const { create, cancelAction, id, edit } = useContext(TaskContext);
+
+    const onSubmit: SubmitHandler<Input> = (data) => {
+      if (type === "create") {
+        create({...data, id: uuidv4().toString(), checked: false});
+      } else if (type === "edit") {
+        edit({...data,  id: id, checked: false})
+      }
+      reset();
+    }
+
+    return (<>
+        <form className={formClassName} onSubmit={handleSubmit(onSubmit)}>
             <div className="input-wrapper">
-            <InputText 
-                name="createTaks" 
-                autoFocus={true}
-                htmlFor="task" 
-                label="Tarefa"
+              <label htmlFor={htmlFor}>{label}</label>
+              <input 
+                autoFocus 
                 type="text"
-                id="task"
-                value={value}
-                onChange={onChange}
+                id={formId}
                 placeholder="Digite uma tarefa" 
-                className={className}
-            />
-            {/* <label htmlFor="task">Tarefa</label>
-            <input autoFocus={true} ref={inputRef} type="text" id="task" value={task.title} onChange={handleChange} placeholder="Tarefa" className={warning ? "text-input text-input--invalid" : "text-input" }/>  */}
+                className="text-input"
+                {...register("title")}
+              />
+              </div>
+              {type === "create" && <Button type="submit" className="form-btn">Criar tarefa</Button>}
+              {type === "edit" && <div className="input-edit--actions">
+                <Button type="submit" id={id}>Salvar</Button>
+                <Button onClick={cancelAction} className="button--cancel">Cancelar</Button>
             </div>
-            <Button onClick={onClick} className="form-btn">Criar tarefa</Button>
+            }
         </form>
+    </>
     )
 }
 

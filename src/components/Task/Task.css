@@ -1,0 +1,44 @@
+.task {
+    align-items: center;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0.5em;
+    margin: 0.8em 0;
+}
+
+.task-title {
+    align-items: center;
+    display: flex;
+    gap: 0.5em;
+}
+
+.task-title--checked {
+    text-decoration: line-through;
+}
+
+.task-actions {
+    display: flex;
+}
+
+.task-icon {
+    cursor: pointer;
+    padding: .5em;
+    
+}
+
+.task-icon:hover {
+    background-color: #429867;
+}
+
+.task:has(.task-icon:hover) {
+    background-color: #1a1a1a;
+}
+
+.task-icon--delete:hover {
+   background-color: #b42529; 
+}
+
+.checkbox {
+    cursor: pointer;
+}
