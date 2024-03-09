@@ -34,13 +34,5 @@ Working on this project allowed me to:
 ### Desktop
 ![Screenshot layout desktop](./docs/desktop-screenshot.png)
 
-## Project Status
-Completed
-
-
-## Project access
-[code](https://github.com/nalutm/to-do-list)   
-[webpage](https://to-do-list-gamma-sand.vercel.app/)
-
 ## Author
 [Nayara Luiza Tavares Moraes](https://github.com/nalutm)
