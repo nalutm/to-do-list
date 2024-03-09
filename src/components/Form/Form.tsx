@@ -9,6 +9,7 @@ import { TaskContext } from "../../contexts/task";
 
 interface Input {
     title: string;
+    category: string;
 }
 
 interface FormProps {
@@ -20,8 +21,12 @@ interface FormProps {
 }
 
 function Form({type, formClassName, htmlFor, label, formId}: FormProps) {
-    const { register, handleSubmit, reset } = useForm<Input>();
-    const { create, cancelAction, id, edit } = useContext(TaskContext);
+    const { create, cancelAction, id, edit, taskTitle } = useContext(TaskContext);
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<Input>({
+      defaultValues: {
+        title: type === "create" ? '' : taskTitle
+      }
+    });
 
     const onSubmit: SubmitHandler<Input> = (data) => {
       if (type === "create") {
@@ -42,7 +47,12 @@ function Form({type, formClassName, htmlFor, label, formId}: FormProps) {
                 id={formId}
                 placeholder="Digite uma tarefa" 
                 className="text-input"
-                {...register("title")}
+                {...register("title", {
+                  required: {
+                    value: true,
+                    message: "Digite uma tarefa"
+                  }
+                })}
               />
               </div>
               {type === "create" && <Button type="submit" className="form-btn">Criar tarefa</Button>}
@@ -52,6 +62,7 @@ function Form({type, formClassName, htmlFor, label, formId}: FormProps) {
                 <Button onClick={cancelAction} className="button--cancel">Cancelar</Button>
               </div>
             }
+            {errors.title && <span style={{color: "red"}}>{errors.title.message}</span>}
         </form>
     </>
     )
