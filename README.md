@@ -27,8 +27,6 @@ Working on this project allowed me to:
 ## Screenshot 
 
 ### Mobile
-<!-- ![Screenshot layout mobile](./docs/mobile-screenshot.jpeg) -->
-
 <div align="center">
   <img src="./docs/mobile-screenshot.jpeg" alt="Screenshot layout mobile" width="300">
 </div>
