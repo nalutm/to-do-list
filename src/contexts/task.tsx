@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, MouseEvent } from "react";
+import { createContext, useState, useEffect } from "react";
 
 type Task = {
 	title: string;
@@ -13,14 +13,14 @@ type TaskContextType = {
 	taskTitle: string;
 	cancelAction(): void;
 	create(task: Task): void;
-	deleteTask(event: MouseEvent): void;
-	check(event: MouseEvent): void;
-	selectTask(event: MouseEvent): void;
+	deleteTask(taskId: string): void;
+	check(taskId: string): void;
+	selectTask(taskId: string): void;
 	edit(task: Task): void;
 }
 
 type TaskProviderProps = {
-	children: JSX.Element
+	children: JSX.Element;
 }
 
 const localToDoList = localStorage.getItem("tasks");
@@ -32,22 +32,22 @@ export const TaskContext = createContext<TaskContextType>({
 	editAction: false,
 	taskTitle: '',
 	cancelAction() {
-		console.log("cancel")
+		console.log("cancel");
 	},
-	selectTask(event) {
-		console.log(event, "deleted")
+	selectTask(taskId) {
+		console.log(taskId, "deleted");
 	},
 	create(task) {
-		console.log(task, "created")
+		console.log(task, "created");
 	},
-	deleteTask(event) {
-		console.log(event, "deleted")
+	deleteTask(taskId) {
+		console.log(taskId, "deleted");
 	},
-	check(event) {
-		console.log(event, "checked")
+	check(taskId) {
+		console.log(taskId, "checked");
 	},
 	edit(task) {
-		console.log(task, "edited")
+		console.log(task, "edited");
 	}
 })
 
@@ -63,36 +63,31 @@ export function TaskProvider({ children }: TaskProviderProps) {
 		setToDoList([...toDoList, task])
 	}
 
-	const deleteTask = (event: MouseEvent) => {
-		const id = event.currentTarget.parentElement?.id
-		const taskList = toDoList.filter((task: Task) => task.id.toString() !== id)
+	const deleteTask = (taskId: string) => {
+		const taskList = toDoList.filter((task: Task) => task.id.toString() !== taskId)
 
 		setToDoList(taskList);
 	}
 
-	const checkTask = (event: MouseEvent) => {
-		const id = event.currentTarget.parentElement?.id;
+	const checkTask = (taskId: string) => {
 
 		const newTasks = toDoList.map((task: Task) => {
-			if (task.id.toString() === id) task.checked = !task.checked;
+			if (task.id.toString() === taskId) task.checked = !task.checked;
 			return task
 		});
 
 		setToDoList(newTasks);
 	}
 
-	const selectTaskToEdit = (event: MouseEvent) => {
-		const id = event.currentTarget.parentElement?.id
+	const selectTaskToEdit = (taskId: string) => {
 		setisTaskEdit(true);
 
-		const taskTitle = toDoList.filter((task: Task) => {
-			if (task.id.toString() === id) {
-				return task
-			}
-		})[0]["title"]
+		const taskTitle = toDoList.filter((task: Task) => 
+			(task.id.toString() === taskId) 
+		)[0]["title"];
 
-		setTaskTitleEdited(taskTitle)
-		if (id) setTaskSelectedid(id)
+		setTaskTitleEdited(taskTitle);
+		if (taskId) setTaskSelectedid(taskId);
 	}
 
 	const cancelEditTask = () => {
@@ -106,7 +101,7 @@ export function TaskProvider({ children }: TaskProviderProps) {
 			return task
 		});
 
-		setToDoList(newTasks)
+		setToDoList(newTasks);
 		setisTaskEdit(false);
 	}
 

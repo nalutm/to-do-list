@@ -25,22 +25,22 @@ function Task({
 	return (
 		<>
 			<div className="task-content">
-				<div className={checkClassName} id={taskID}>
+				<div className={checkClassName}>
 					{!isChecked &&
-						<ImCheckboxUnchecked className="checkbox" onClick={check} />}
+						<ImCheckboxUnchecked className="checkbox" onClick={() => check(taskID)} />}
 					{isChecked &&
-						<ImCheckboxChecked className="checkbox" onClick={check} />}
+						<ImCheckboxChecked className="checkbox" onClick={() => check(taskID)} />}
 					{title}
 				</div>
 				{!editAction &&
-					<div className="task-actions" id={taskID}>
-						<FaRegTrashAlt onClick={deleteTask} className="task-icon task-icon--delete" />
-						<FaPencilAlt onClick={selectTask} className="task-icon" />
+					<div className="task-actions">
+						<FaRegTrashAlt onClick={() => deleteTask(taskID)} className="task-icon task-icon--delete" />
+						<FaPencilAlt onClick={() => selectTask(taskID)} className="task-icon" />
 					</div>}
 				{editAction && id !== taskID &&
-					<div className="task-actions" id={taskID}>
-						<FaRegTrashAlt onClick={deleteTask} className="task-icon task-icon--delete" />
-						<FaPencilAlt onClick={selectTask} className="task-icon" />
+					<div className="task-actions">
+						<FaRegTrashAlt onClick={() => deleteTask(taskID)} className="task-icon task-icon--delete" />
+						<FaPencilAlt onClick={() => selectTask(taskID)} className="task-icon" />
 					</div>}
 			</div>
 			{editAction && id === taskID &&
