@@ -51,6 +51,13 @@
     margin-left: 1em;
 }
 
+.error {
+    display: block;
+    color: #b42529;
+    font-weight: bold;
+    margin-top: 0.5em;
+}
+
 .invalid-input {
     color: #b42529;
     font-weight: bold;

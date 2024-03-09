@@ -37,7 +37,7 @@ function Form({type, formClassName, htmlFor, label, formId}: FormProps) {
       reset();
     }
 
-    return (<>
+    return (<div>
         <form className={formClassName} onSubmit={handleSubmit(onSubmit)}>
             <div className="input-wrapper">
               <label htmlFor={htmlFor}>{label}</label>
@@ -62,9 +62,9 @@ function Form({type, formClassName, htmlFor, label, formId}: FormProps) {
                 <Button onClick={cancelAction} className="button--cancel">Cancelar</Button>
               </div>
             }
-            {errors.title && <span style={{color: "red"}}>{errors.title.message}</span>}
         </form>
-    </>
+        {errors.title && <span className="error">{errors.title.message}</span>}
+    </div>
     )
 }
 
