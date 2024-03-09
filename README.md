@@ -7,7 +7,7 @@ User can:
 - Create 
 - Check 
 - Edit
-- Remove
+- Delete
 - List 
 
 ### Development process
