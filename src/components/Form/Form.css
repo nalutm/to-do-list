@@ -1,73 +1,73 @@
 .form {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
 }
 
 .input-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
 }
 
 .text-input {
-    border-radius: 8px;
-    border: 0.2em solid transparent;
-    color: rgba(255, 255, 255, 1);
-    height: 3em;
-    padding: 0.5em;
-    box-sizing: border-box;
-    background-color: #3b3b3b;
+	border-radius: 8px;
+	border: 0.2em solid transparent;
+	color: rgba(255, 255, 255, 1);
+	height: 3em;
+	padding: 0.5em;
+	box-sizing: border-box;
+	background-color: #3b3b3b;
 }
 
 .text-input:focus {
-    border: 0.2em solid transparent;
+	border: 0.2em solid transparent;
 }
 
 .text-input--invalid {
-    border-color: #b42529;
+	border-color: #b42529;
 }
 
 .edit {
-    align-items: center;
-    display: flex;
-    gap: 0.5em;
-    margin-left: 1em;
+	align-items: center;
+	display: flex;
+	gap: 0.5em;
+	margin-left: 1em;
 }
 
 .input-edit {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
 }
 
 .input-edit--actions {
-    display: flex;
-    align-self: flex-end;
-    gap: 0.5em;
+	display: flex;
+	align-self: flex-end;
+	gap: 0.5em;
 }
 
 .invalid-input--edit-task {
-    margin-left: 1em;
+	margin-left: 1em;
 }
 
 .error {
-    display: block;
-    color: #b42529;
-    font-weight: bold;
-    margin-top: 0.5em;
+	display: block;
+	color: #b42529;
+	font-weight: bold;
+	margin-top: 0.5em;
 }
 
 .invalid-input {
-    color: #b42529;
-    font-weight: bold;
-    display: block;
-    margin-top: 0.3em;
+	color: #b42529;
+	font-weight: bold;
+	display: block;
+	margin-top: 0.3em;
 }
 
 @media only screen and (max-width: 600px) {
-    .edit {
-        flex-direction: column;
-        margin-left: 0;
-    }
+	.edit {
+		flex-direction: column;
+		margin-left: 0;
+	}
 }
