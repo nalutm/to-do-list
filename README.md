@@ -39,8 +39,8 @@ Completed
 
 
 ## Project access
-[code](https://github.com/nalutm/to-do-list). 
-[webpage](https://to-do-list-gamma-sand.vercel.app/).
+[code](https://github.com/nalutm/to-do-list)   
+[webpage](https://to-do-list-gamma-sand.vercel.app/)
 
 ## Author
 [Nayara Luiza Tavares Moraes](https://github.com/nalutm)
