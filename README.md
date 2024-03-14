@@ -19,6 +19,7 @@ Working on this project allowed me to:
   - useContext, 
   - useForm
 - Create React components
+- Implement Carbon Design System
 
 ## Skills
 * TypeScript
@@ -28,7 +29,7 @@ Working on this project allowed me to:
 
 ### Mobile
 <div align="center">
-  <img src="./docs/mobile-screenshot.jpeg" alt="Screenshot layout mobile" width="300">
+  <img src="./docs/mobile-screenshot.png" alt="Screenshot layout mobile" width="300">
 </div>
 
 ### Desktop
