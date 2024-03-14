@@ -20,7 +20,7 @@ function Form() {
     return (
         <CarbonForm  onSubmit={handleSubmit(onSubmit)}>
             <Stack gap={7}>
-                <TextInput type="text" required labelText="Tarefa" id="create" {...register("title")} />
+                <TextInput type="text" required labelText="Tarefa" id="create" {...register("title")} placeholder="Digite sua tarefa"/>
                 <Button type="submit" kind="secondary">Criar Tarefa</Button>
             </Stack>
         </CarbonForm>

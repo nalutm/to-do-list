@@ -8,16 +8,16 @@ type Task = {
 }
 
 type TaskContextType = {
-	data: Task[];
-	id: string,
-	editAction: boolean;
-	taskTitle: string;
 	cancelAction(): void;
-	create(task: Task): void;
-	deleteTask(taskId?: string): void;
 	check(taskId: string): void;
-	selectTask(taskId?: string): void;
+	create(task: Task): void;
+	data: Task[];
+	deleteTask(taskId?: string): void;
 	edit(task: Task): void;
+	editAction: boolean;
+	id: string,
+	selectTask(taskId?: string): void;
+	taskTitle: string;
 }
 
 type TaskProviderProps = {
@@ -53,15 +53,13 @@ export const TaskContext = createContext<TaskContextType>({
 })
 
 export function TaskProvider({ children }: TaskProviderProps) {
-	const theme = 'g100'; // ← your implementation, e.g. fetching user settings
+	const theme = 'g100';
 
 	const [toDoList, setToDoList] = useState(() =>
 		localToDoList ? JSON.parse(localToDoList) : toDoListInitialValue
 	);
-	// const [isTaskEdit, setisTaskEdit] = useState(false);
 	const [taskSelectedId, setTaskSelectedid] = useState('');
 	const [taskTitleEdited, setTaskTitleEdited] = useState('');
-
 	const [open, setOpen] = useState(false);
 
 	const createTask = (task: Task) => {
@@ -75,7 +73,6 @@ export function TaskProvider({ children }: TaskProviderProps) {
 	}
 
 	const checkTask = (taskId: string) => {
-
 		const newTasks = toDoList.map((task: Task) => {
 			if (task.id.toString() === taskId) task.checked = !task.checked;
 			return task
@@ -85,27 +82,21 @@ export function TaskProvider({ children }: TaskProviderProps) {
 	}
 
 	const selectTaskToEdit = (taskId: string) => {
-		// setisTaskEdit(true);
-		console.log(taskId)
 		setOpen(true);
 
 		const taskTitle = toDoList.filter((task: Task) =>
 			(task.id.toString() === taskId)
 		)[0]["title"];
 
-		console.log(taskTitle)
-
 		setTaskTitleEdited(taskTitle);
 		if (taskId) setTaskSelectedid(taskId);
 	}
 
 	const cancelEditTask = () => {
-		// setisTaskEdit(false);
 		setOpen(false);
 	}
 
 	const editTask = (taskEdited: Task) => {
-		console.log(taskEdited);
 		const newTasks = toDoList.map((task: Task) => {
 			if (task.id.toString() === taskEdited.id) task.title = taskEdited.title;
 			return task
@@ -113,7 +104,6 @@ export function TaskProvider({ children }: TaskProviderProps) {
 
 		setToDoList(newTasks);
 		setOpen(false);
-		// setisTaskEdit(false);
 	}
 
 	useEffect(() => {
@@ -145,5 +135,4 @@ export function TaskProvider({ children }: TaskProviderProps) {
 			</GlobalTheme>
 		</TaskContext.Provider>
 	)
-
 }

@@ -1,3 +1,6 @@
+/**
+ To avoid the ContainedList, ContainedListItem import error
+ * @ts-ignore */
 import { Button, ContainedList, ContainedListItem } from "@carbon/react";
 import { CheckmarkOutline, CircleStroke, Edit, TrashCan } from '@carbon/react/icons';
 import { useContext } from "react";
@@ -7,8 +10,22 @@ export const TaskList = () => {
     const { data, check, deleteTask, selectTask } = useContext(TaskContext);
 
     const itemAction = <>
-        <Button kind="ghost" iconDescription="Editar" hasIconOnly renderIcon={Edit} aria-label="Editar" onClick={(evt) => selectTask(evt.currentTarget.parentElement?.parentElement?.parentElement?.parentElement?.id)} />
-        <Button kind="ghost" iconDescription="Deletar" hasIconOnly renderIcon={TrashCan} aria-label="Deletar" onClick={(evt) => deleteTask(evt.currentTarget.parentElement?.parentElement?.parentElement?.parentElement?.id)}  />
+        <Button 
+            kind="ghost" 
+            iconDescription="Editar" 
+            hasIconOnly 
+            renderIcon={Edit} 
+            aria-label="Editar" 
+            onClick={(evt) => selectTask(evt.currentTarget.parentElement?.parentElement?.parentElement?.parentElement?.id)} 
+        />
+        <Button 
+            kind="ghost" 
+            iconDescription="Deletar" 
+            hasIconOnly 
+            renderIcon={TrashCan} 
+            aria-label="Deletar" 
+            onClick={(evt) => deleteTask(evt.currentTarget.parentElement?.parentElement?.parentElement?.parentElement?.id)}  
+        />
     </>
     return (
         <> {data.length > 0 &&
