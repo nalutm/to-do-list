@@ -1,3 +1,4 @@
+import { GlobalTheme } from "@carbon/react";
 import { createContext, useState, useEffect } from "react";
 
 type Task = {
@@ -13,9 +14,9 @@ type TaskContextType = {
 	taskTitle: string;
 	cancelAction(): void;
 	create(task: Task): void;
-	deleteTask(taskId: string): void;
+	deleteTask(taskId?: string): void;
 	check(taskId: string): void;
-	selectTask(taskId: string): void;
+	selectTask(taskId?: string): void;
 	edit(task: Task): void;
 }
 
@@ -52,12 +53,16 @@ export const TaskContext = createContext<TaskContextType>({
 })
 
 export function TaskProvider({ children }: TaskProviderProps) {
+	const theme = 'g100'; // ← your implementation, e.g. fetching user settings
+
 	const [toDoList, setToDoList] = useState(() =>
 		localToDoList ? JSON.parse(localToDoList) : toDoListInitialValue
 	);
-	const [isTaskEdit, setisTaskEdit] = useState(false);
+	// const [isTaskEdit, setisTaskEdit] = useState(false);
 	const [taskSelectedId, setTaskSelectedid] = useState('');
 	const [taskTitleEdited, setTaskTitleEdited] = useState('');
+
+	const [open, setOpen] = useState(false);
 
 	const createTask = (task: Task) => {
 		setToDoList([...toDoList, task])
@@ -80,18 +85,23 @@ export function TaskProvider({ children }: TaskProviderProps) {
 	}
 
 	const selectTaskToEdit = (taskId: string) => {
-		setisTaskEdit(true);
+		// setisTaskEdit(true);
+		console.log(taskId)
+		setOpen(true);
 
-		const taskTitle = toDoList.filter((task: Task) => 
-			(task.id.toString() === taskId) 
+		const taskTitle = toDoList.filter((task: Task) =>
+			(task.id.toString() === taskId)
 		)[0]["title"];
+
+		console.log(taskTitle)
 
 		setTaskTitleEdited(taskTitle);
 		if (taskId) setTaskSelectedid(taskId);
 	}
 
 	const cancelEditTask = () => {
-		setisTaskEdit(false);
+		// setisTaskEdit(false);
+		setOpen(false);
 	}
 
 	const editTask = (taskEdited: Task) => {
@@ -102,17 +112,23 @@ export function TaskProvider({ children }: TaskProviderProps) {
 		});
 
 		setToDoList(newTasks);
-		setisTaskEdit(false);
+		setOpen(false);
+		// setisTaskEdit(false);
 	}
 
 	useEffect(() => {
 		localStorage.setItem("tasks", JSON.stringify(toDoList));
 	}, [toDoList])
 
+
+	useEffect(() => {
+		document.documentElement.dataset.carbonTheme = theme;
+	}, [theme]);
+
 	const value = {
 		data: toDoList,
 		id: taskSelectedId,
-		editAction: isTaskEdit,
+		editAction: open,
 		taskTitle: taskTitleEdited,
 		cancelAction: cancelEditTask,
 		create: createTask,
@@ -124,7 +140,9 @@ export function TaskProvider({ children }: TaskProviderProps) {
 
 	return (
 		<TaskContext.Provider value={value}>
-			{children}
+			<GlobalTheme theme={theme}>
+				{children}
+			</GlobalTheme>
 		</TaskContext.Provider>
 	)
 
