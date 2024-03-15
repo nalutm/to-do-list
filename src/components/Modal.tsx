@@ -17,7 +17,7 @@ function Modal() {
 
 	const onSubmit: SubmitHandler<InputTask> = (data) => {
 		if (data.editTitle !== '') edit({ title: data.editTitle, id: id, checked: false });
-		cancelAction();
+		cancelAction("edit");
 		reset();
 	}
 
@@ -28,7 +28,7 @@ function Modal() {
             modalLabel={"Editar tarefa"}
             primaryButtonText="Salvar"
             secondaryButtonText="Cancelar"
-            onRequestClose={cancelAction}
+            onRequestClose={() => cancelAction("edit")}
             onRequestSubmit={handleSubmit(onSubmit)}
         >
             <CarbonForm>

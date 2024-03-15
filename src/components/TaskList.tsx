@@ -5,9 +5,10 @@ import { Button, ContainedList, ContainedListItem } from "@carbon/react";
 import { CheckmarkOutline, CircleStroke, Edit, TrashCan } from '@carbon/react/icons';
 import { useContext } from "react";
 import { TaskContext } from "../contexts/task";
+import ModalDelete from "./ModalDelete";
 
 export const TaskList = () => {
-    const { data, check, deleteTask, selectTask } = useContext(TaskContext);
+    const { data, check, selectTask } = useContext(TaskContext);
 
     const itemAction = <>
         <Button 
@@ -16,7 +17,7 @@ export const TaskList = () => {
             hasIconOnly 
             renderIcon={Edit} 
             aria-label="Editar" 
-            onClick={(evt) => selectTask(evt.currentTarget.parentElement?.parentElement?.parentElement?.parentElement?.id)} 
+            onClick={(evt) => selectTask(evt.currentTarget.parentElement?.parentElement?.parentElement?.parentElement?.id, "edit")} 
         />
         <Button 
             kind="ghost" 
@@ -24,7 +25,7 @@ export const TaskList = () => {
             hasIconOnly 
             renderIcon={TrashCan} 
             aria-label="Deletar" 
-            onClick={(evt) => deleteTask(evt.currentTarget.parentElement?.parentElement?.parentElement?.parentElement?.id)}  
+            onClick={(evt) => selectTask(evt.currentTarget.parentElement?.parentElement?.parentElement?.parentElement?.id, "delete")}  
         />
     </>
     return (
@@ -44,6 +45,7 @@ export const TaskList = () => {
                         </ContainedListItem>
                     )
                 })}
+                <ModalDelete />
             </ContainedList>
         }
         </>
