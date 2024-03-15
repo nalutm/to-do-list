@@ -1,4 +1,4 @@
-import {Modal as CarbonModal, Form as CarbonForm, TextInput} from "@carbon/react";
+import {Modal as CarbonModal, TextInput} from "@carbon/react";
 import { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { TaskContext } from "../contexts/task";
@@ -12,7 +12,7 @@ function Modal() {
     const { register, handleSubmit, reset } = useForm<InputTask>({
         defaultValues: {
             editTitle: taskTitle
-        }
+        } 
     });
 
 	const onSubmit: SubmitHandler<InputTask> = (data) => {
@@ -31,9 +31,7 @@ function Modal() {
             onRequestClose={() => cancelAction("edit")}
             onRequestSubmit={handleSubmit(onSubmit)}
         >
-            <CarbonForm>
-                <TextInput id="edit" type="text" labelText="" placeholder={taskTitle} {...register("editTitle")} />
-            </CarbonForm>
+            <TextInput id="edit" type="text" labelText="" placeholder={taskTitle} {...register("editTitle")}/>
         </CarbonModal>
     )
 }
