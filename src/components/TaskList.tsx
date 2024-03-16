@@ -1,7 +1,7 @@
 /**
  To avoid the ContainedList, ContainedListItem import error
  * @ts-ignore */
-import { Button, ContainedList, ContainedListItem } from "@carbon/react";
+import { Button, ContainedList, ContainedListItem, Tag } from "@carbon/react";
 import { CheckmarkOutline, CircleStroke, Edit, TrashCan } from '@carbon/react/icons';
 import { useContext } from "react";
 import { TaskContext } from "../contexts/task";
@@ -30,7 +30,17 @@ export const TaskList = () => {
     </>
     return (
         <> {data.length > 0 &&
-            <ContainedList label="Tarefas" kind="on-page">
+            <ContainedList label={<div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }}>
+                      <span>List title</span>
+                      <Tag size="sm" role="status" aria-label={`${data.length} itens na lista`}>
+                        {data.length}
+                      </Tag>
+                    </div>} kind="on-page">
+
                 {data.map((task) => {
                     return (
                         <ContainedListItem 

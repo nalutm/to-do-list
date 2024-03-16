@@ -1,25 +1,23 @@
 import {Modal as CarbonModal, TextInput} from "@carbon/react";
-import { useContext } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { ChangeEvent, useContext, useState } from "react";
 import { TaskContext } from "../contexts/task";
-
-interface InputTask {
-	editTitle: string;
-}
 
 function Modal() {
     const { editAction, cancelAction, edit, id, taskTitle } = useContext(TaskContext);
-    const { register, handleSubmit, reset } = useForm<InputTask>({
-        defaultValues: {
-            editTitle: taskTitle
-        } 
-    });
+    const [newTitle, setNewTitle] = useState(taskTitle);
 
-	const onSubmit: SubmitHandler<InputTask> = (data) => {
-		if (data.editTitle !== '') edit({ title: data.editTitle, id: id, checked: false });
+    const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
+        setNewTitle(evt.target.value);
+    }
+
+	const onSubmit = () => {
+        if (newTitle) edit({ title: newTitle, id: id, checked: false });
 		cancelAction("edit");
-		reset();
 	}
+
+    if (taskTitle === '') {
+        return null;
+    }
 
     return (
         <CarbonModal
@@ -29,9 +27,17 @@ function Modal() {
             primaryButtonText="Salvar"
             secondaryButtonText="Cancelar"
             onRequestClose={() => cancelAction("edit")}
-            onRequestSubmit={handleSubmit(onSubmit)}
+            onChange={handleChange}
+            onRequestSubmit={onSubmit}
         >
-            <TextInput id="edit" type="text" labelText="" placeholder={taskTitle} {...register("editTitle")}/>
+            <TextInput 
+                id="edit" 
+                type="text" 
+                labelText="" 
+                required
+                autoFocus
+                defaultValue={taskTitle} 
+            />
         </CarbonModal>
     )
 }
