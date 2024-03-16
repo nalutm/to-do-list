@@ -51,7 +51,7 @@ export const TaskContext = createContext<TaskContextType>({
 	selectTask(taskId, action) {
 		console.log(taskId, action);
 	},
-	taskTitle: 'chuchu'
+	taskTitle: ''
 })
 
 export function TaskProvider({ children }: TaskProviderProps) {

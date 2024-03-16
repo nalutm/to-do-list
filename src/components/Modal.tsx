@@ -4,23 +4,21 @@ import { TaskContext } from "../contexts/task";
 
 function Modal() {
     const { editAction, cancelAction, edit, id, taskTitle } = useContext(TaskContext);
-    const [newTitle, setNewTitle] = useState(taskTitle);   
+    const [newTitle, setNewTitle] = useState('');   
 
     const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
         setNewTitle(evt.target.value);
     }
 
 	const onSubmit = () => {
-        if (!newTitle) {
-            setNewTitle(taskTitle);
-            cancelAction("edit");
-            return
-        }
         if (newTitle) {
             edit({ title: newTitle, id: id, checked: false });
             cancelAction("edit");
         }
 		
+        setNewTitle(taskTitle);
+        cancelAction("edit");
+
 	}
 
     if (taskTitle === '') {
@@ -41,10 +39,8 @@ function Modal() {
             <TextInput 
                 id="edit" 
                 type="text" 
-                labelText="" 
-                required
-                autoFocus
-                defaultValue={taskTitle} 
+                labelText=""
+                value={newTitle}
             />
         </CarbonModal>
     )
