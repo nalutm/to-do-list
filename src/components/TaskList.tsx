@@ -35,7 +35,7 @@ export const TaskList = () => {
                 alignItems: 'center',
                 justifyContent: 'space-between'
               }}>
-                      <span>List title</span>
+                      <span>Tarefas</span>
                       <Tag size="sm" role="status" aria-label={`${data.length} itens na lista`}>
                         {data.length}
                       </Tag>

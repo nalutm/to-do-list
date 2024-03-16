@@ -6,13 +6,28 @@ function Modal() {
     const { editAction, cancelAction, edit, id, taskTitle } = useContext(TaskContext);
     const [newTitle, setNewTitle] = useState(taskTitle);
 
+    console.log(newTitle);
+    console.log(taskTitle)
+
     const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
         setNewTitle(evt.target.value);
     }
 
 	const onSubmit = () => {
-        if (newTitle) edit({ title: newTitle, id: id, checked: false });
-		cancelAction("edit");
+        if (!newTitle) {
+            console.log(newTitle, "string vazia")
+            console.log(taskTitle, "task title")
+            console.log(newTitle, "new Title")
+            setNewTitle(taskTitle);
+            console.log(newTitle, "new Title em seguida do setNewTitle")
+            
+            cancelAction("edit");
+            return
+        }
+        
+        edit({ title: newTitle, id: id, checked: false });
+		
+        cancelAction("edit");
 	}
 
     if (taskTitle === '') {
