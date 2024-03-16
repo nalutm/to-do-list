@@ -1,7 +1,7 @@
 import { Button, Form as CarbonForm, Stack, TextInput } from "@carbon/react";
 import { ChangeEvent, useContext, useState } from "react";
 import { TaskContext } from "../contexts/task";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from 'uuid';
 
 interface Input {
@@ -35,7 +35,6 @@ function Form() {
             <Stack gap={7}>
                 <TextInput 
                     type="text" 
-                    // required 
                     labelText="Tarefa" 
                     id="create" 
                     {...register("title")} 
